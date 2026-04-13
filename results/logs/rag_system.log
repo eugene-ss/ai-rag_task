@@ -1,0 +1,398 @@
+2026-04-14 00:17:52,943 - resume_rag.ingestion.loader - INFO - Loading 2484 resumes from /Users/Yauheni_Semchanka/Desktop/AI_Architect/ai-rag_task/dataset/Resume.csv
+2026-04-14 00:17:53,894 - resume_rag.ingestion.loader - INFO - Created 19295 document chunks from 2484 documents
+2026-04-14 00:17:56,364 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:17:57,646 - resume_rag.retrieval.vector_store - INFO - Added batch 1/193 (100 documents)
+2026-04-14 00:17:58,630 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:17:59,774 - resume_rag.retrieval.vector_store - INFO - Added batch 2/193 (100 documents)
+2026-04-14 00:18:01,602 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:02,744 - resume_rag.retrieval.vector_store - INFO - Added batch 3/193 (100 documents)
+2026-04-14 00:18:03,484 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:04,473 - resume_rag.retrieval.vector_store - INFO - Added batch 4/193 (100 documents)
+2026-04-14 00:18:05,245 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:06,184 - resume_rag.retrieval.vector_store - INFO - Added batch 5/193 (100 documents)
+2026-04-14 00:18:07,244 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:08,242 - resume_rag.retrieval.vector_store - INFO - Added batch 6/193 (100 documents)
+2026-04-14 00:18:09,216 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:10,054 - resume_rag.retrieval.vector_store - INFO - Added batch 7/193 (100 documents)
+2026-04-14 00:18:10,891 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:11,727 - resume_rag.retrieval.vector_store - INFO - Added batch 8/193 (100 documents)
+2026-04-14 00:18:12,550 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:13,208 - resume_rag.retrieval.vector_store - INFO - Added batch 9/193 (100 documents)
+2026-04-14 00:18:14,030 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:14,610 - resume_rag.retrieval.vector_store - INFO - Added batch 10/193 (100 documents)
+2026-04-14 00:18:15,462 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:16,052 - resume_rag.retrieval.vector_store - INFO - Added batch 11/193 (100 documents)
+2026-04-14 00:18:17,568 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:18,330 - resume_rag.retrieval.vector_store - INFO - Added batch 12/193 (100 documents)
+2026-04-14 00:18:19,308 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:19,906 - resume_rag.retrieval.vector_store - INFO - Added batch 13/193 (100 documents)
+2026-04-14 00:18:20,886 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:21,462 - resume_rag.retrieval.vector_store - INFO - Added batch 14/193 (100 documents)
+2026-04-14 00:18:22,433 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:23,377 - resume_rag.retrieval.vector_store - INFO - Added batch 15/193 (100 documents)
+2026-04-14 00:18:24,167 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:24,824 - resume_rag.retrieval.vector_store - INFO - Added batch 16/193 (100 documents)
+2026-04-14 00:18:26,118 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:26,841 - resume_rag.retrieval.vector_store - INFO - Added batch 17/193 (100 documents)
+2026-04-14 00:18:27,836 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:28,577 - resume_rag.retrieval.vector_store - INFO - Added batch 18/193 (100 documents)
+2026-04-14 00:18:29,308 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:30,243 - resume_rag.retrieval.vector_store - INFO - Added batch 19/193 (100 documents)
+2026-04-14 00:18:31,130 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:32,198 - resume_rag.retrieval.vector_store - INFO - Added batch 20/193 (100 documents)
+2026-04-14 00:18:33,005 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:33,768 - resume_rag.retrieval.vector_store - INFO - Added batch 21/193 (100 documents)
+2026-04-14 00:18:34,644 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:35,388 - resume_rag.retrieval.vector_store - INFO - Added batch 22/193 (100 documents)
+2026-04-14 00:18:36,162 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:37,075 - resume_rag.retrieval.vector_store - INFO - Added batch 23/193 (100 documents)
+2026-04-14 00:18:38,197 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:39,104 - resume_rag.retrieval.vector_store - INFO - Added batch 24/193 (100 documents)
+2026-04-14 00:18:40,153 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:40,977 - resume_rag.retrieval.vector_store - INFO - Added batch 25/193 (100 documents)
+2026-04-14 00:18:41,748 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:42,566 - resume_rag.retrieval.vector_store - INFO - Added batch 26/193 (100 documents)
+2026-04-14 00:18:43,523 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:44,210 - resume_rag.retrieval.vector_store - INFO - Added batch 27/193 (100 documents)
+2026-04-14 00:18:45,393 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:46,210 - resume_rag.retrieval.vector_store - INFO - Added batch 28/193 (100 documents)
+2026-04-14 00:18:48,129 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:49,042 - resume_rag.retrieval.vector_store - INFO - Added batch 29/193 (100 documents)
+2026-04-14 00:18:50,053 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:50,778 - resume_rag.retrieval.vector_store - INFO - Added batch 30/193 (100 documents)
+2026-04-14 00:18:51,773 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:52,381 - resume_rag.retrieval.vector_store - INFO - Added batch 31/193 (100 documents)
+2026-04-14 00:18:53,158 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:53,845 - resume_rag.retrieval.vector_store - INFO - Added batch 32/193 (100 documents)
+2026-04-14 00:18:54,756 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:55,280 - resume_rag.retrieval.vector_store - INFO - Added batch 33/193 (100 documents)
+2026-04-14 00:18:56,261 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:56,845 - resume_rag.retrieval.vector_store - INFO - Added batch 34/193 (100 documents)
+2026-04-14 00:18:58,401 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:18:59,251 - resume_rag.retrieval.vector_store - INFO - Added batch 35/193 (100 documents)
+2026-04-14 00:19:00,122 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:00,742 - resume_rag.retrieval.vector_store - INFO - Added batch 36/193 (100 documents)
+2026-04-14 00:19:01,750 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:02,476 - resume_rag.retrieval.vector_store - INFO - Added batch 37/193 (100 documents)
+2026-04-14 00:19:03,488 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:04,032 - resume_rag.retrieval.vector_store - INFO - Added batch 38/193 (100 documents)
+2026-04-14 00:19:05,109 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:05,716 - resume_rag.retrieval.vector_store - INFO - Added batch 39/193 (100 documents)
+2026-04-14 00:19:06,886 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:07,576 - resume_rag.retrieval.vector_store - INFO - Added batch 40/193 (100 documents)
+2026-04-14 00:19:09,100 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:09,969 - resume_rag.retrieval.vector_store - INFO - Added batch 41/193 (100 documents)
+2026-04-14 00:19:10,963 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:11,477 - resume_rag.retrieval.vector_store - INFO - Added batch 42/193 (100 documents)
+2026-04-14 00:19:12,681 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:13,434 - resume_rag.retrieval.vector_store - INFO - Added batch 43/193 (100 documents)
+2026-04-14 00:19:14,965 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:15,866 - resume_rag.retrieval.vector_store - INFO - Added batch 44/193 (100 documents)
+2026-04-14 00:19:16,757 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:17,292 - resume_rag.retrieval.vector_store - INFO - Added batch 45/193 (100 documents)
+2026-04-14 00:19:18,239 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:18,826 - resume_rag.retrieval.vector_store - INFO - Added batch 46/193 (100 documents)
+2026-04-14 00:19:19,776 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:20,299 - resume_rag.retrieval.vector_store - INFO - Added batch 47/193 (100 documents)
+2026-04-14 00:19:21,819 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:22,668 - resume_rag.retrieval.vector_store - INFO - Added batch 48/193 (100 documents)
+2026-04-14 00:19:23,589 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:24,158 - resume_rag.retrieval.vector_store - INFO - Added batch 49/193 (100 documents)
+2026-04-14 00:19:42,313 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:43,211 - resume_rag.retrieval.vector_store - INFO - Added batch 50/193 (100 documents)
+2026-04-14 00:19:44,204 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:44,841 - resume_rag.retrieval.vector_store - INFO - Added batch 51/193 (100 documents)
+2026-04-14 00:19:45,642 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:46,146 - resume_rag.retrieval.vector_store - INFO - Added batch 52/193 (100 documents)
+2026-04-14 00:19:51,388 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:52,257 - resume_rag.retrieval.vector_store - INFO - Added batch 53/193 (100 documents)
+2026-04-14 00:19:53,032 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:53,617 - resume_rag.retrieval.vector_store - INFO - Added batch 54/193 (100 documents)
+2026-04-14 00:19:54,689 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:55,409 - resume_rag.retrieval.vector_store - INFO - Added batch 55/193 (100 documents)
+2026-04-14 00:19:58,345 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:19:59,297 - resume_rag.retrieval.vector_store - INFO - Added batch 56/193 (100 documents)
+2026-04-14 00:20:00,054 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:00,585 - resume_rag.retrieval.vector_store - INFO - Added batch 57/193 (100 documents)
+2026-04-14 00:20:01,395 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:02,238 - resume_rag.retrieval.vector_store - INFO - Added batch 58/193 (100 documents)
+2026-04-14 00:20:03,059 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:03,804 - resume_rag.retrieval.vector_store - INFO - Added batch 59/193 (100 documents)
+2026-04-14 00:20:04,554 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:05,303 - resume_rag.retrieval.vector_store - INFO - Added batch 60/193 (100 documents)
+2026-04-14 00:20:06,128 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:06,872 - resume_rag.retrieval.vector_store - INFO - Added batch 61/193 (100 documents)
+2026-04-14 00:20:07,624 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:08,392 - resume_rag.retrieval.vector_store - INFO - Added batch 62/193 (100 documents)
+2026-04-14 00:20:09,246 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:09,967 - resume_rag.retrieval.vector_store - INFO - Added batch 63/193 (100 documents)
+2026-04-14 00:20:10,869 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:11,677 - resume_rag.retrieval.vector_store - INFO - Added batch 64/193 (100 documents)
+2026-04-14 00:20:12,611 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:13,382 - resume_rag.retrieval.vector_store - INFO - Added batch 65/193 (100 documents)
+2026-04-14 00:20:14,354 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:15,146 - resume_rag.retrieval.vector_store - INFO - Added batch 66/193 (100 documents)
+2026-04-14 00:20:15,988 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:16,704 - resume_rag.retrieval.vector_store - INFO - Added batch 67/193 (100 documents)
+2026-04-14 00:20:18,330 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:19,488 - resume_rag.retrieval.vector_store - INFO - Added batch 68/193 (100 documents)
+2026-04-14 00:20:20,519 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:21,229 - resume_rag.retrieval.vector_store - INFO - Added batch 69/193 (100 documents)
+2026-04-14 00:20:22,143 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:22,856 - resume_rag.retrieval.vector_store - INFO - Added batch 70/193 (100 documents)
+2026-04-14 00:20:23,613 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:24,346 - resume_rag.retrieval.vector_store - INFO - Added batch 71/193 (100 documents)
+2026-04-14 00:20:25,318 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:26,166 - resume_rag.retrieval.vector_store - INFO - Added batch 72/193 (100 documents)
+2026-04-14 00:20:27,167 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:27,863 - resume_rag.retrieval.vector_store - INFO - Added batch 73/193 (100 documents)
+2026-04-14 00:20:28,645 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:29,342 - resume_rag.retrieval.vector_store - INFO - Added batch 74/193 (100 documents)
+2026-04-14 00:20:30,133 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:30,870 - resume_rag.retrieval.vector_store - INFO - Added batch 75/193 (100 documents)
+2026-04-14 00:20:32,031 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:32,939 - resume_rag.retrieval.vector_store - INFO - Added batch 76/193 (100 documents)
+2026-04-14 00:20:33,912 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:34,608 - resume_rag.retrieval.vector_store - INFO - Added batch 77/193 (100 documents)
+2026-04-14 00:20:35,355 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:36,125 - resume_rag.retrieval.vector_store - INFO - Added batch 78/193 (100 documents)
+2026-04-14 00:20:36,836 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:37,582 - resume_rag.retrieval.vector_store - INFO - Added batch 79/193 (100 documents)
+2026-04-14 00:20:38,375 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:39,085 - resume_rag.retrieval.vector_store - INFO - Added batch 80/193 (100 documents)
+2026-04-14 00:20:39,827 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:40,539 - resume_rag.retrieval.vector_store - INFO - Added batch 81/193 (100 documents)
+2026-04-14 00:20:41,299 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:42,031 - resume_rag.retrieval.vector_store - INFO - Added batch 82/193 (100 documents)
+2026-04-14 00:20:42,816 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:43,490 - resume_rag.retrieval.vector_store - INFO - Added batch 83/193 (100 documents)
+2026-04-14 00:20:44,338 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:20:45,066 - resume_rag.retrieval.vector_store - INFO - Added batch 84/193 (100 documents)
+2026-04-14 00:21:02,769 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:03,728 - resume_rag.retrieval.vector_store - INFO - Added batch 85/193 (100 documents)
+2026-04-14 00:21:04,544 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:05,383 - resume_rag.retrieval.vector_store - INFO - Added batch 86/193 (100 documents)
+2026-04-14 00:21:06,195 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:06,906 - resume_rag.retrieval.vector_store - INFO - Added batch 87/193 (100 documents)
+2026-04-14 00:21:08,114 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:09,008 - resume_rag.retrieval.vector_store - INFO - Added batch 88/193 (100 documents)
+2026-04-14 00:21:09,814 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:10,553 - resume_rag.retrieval.vector_store - INFO - Added batch 89/193 (100 documents)
+2026-04-14 00:21:13,364 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:14,248 - resume_rag.retrieval.vector_store - INFO - Added batch 90/193 (100 documents)
+2026-04-14 00:21:16,642 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:17,478 - resume_rag.retrieval.vector_store - INFO - Added batch 91/193 (100 documents)
+2026-04-14 00:21:20,472 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:21,371 - resume_rag.retrieval.vector_store - INFO - Added batch 92/193 (100 documents)
+2026-04-14 00:21:23,164 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:24,104 - resume_rag.retrieval.vector_store - INFO - Added batch 93/193 (100 documents)
+2026-04-14 00:21:25,005 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:25,801 - resume_rag.retrieval.vector_store - INFO - Added batch 94/193 (100 documents)
+2026-04-14 00:21:26,837 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:27,430 - resume_rag.retrieval.vector_store - INFO - Added batch 95/193 (100 documents)
+2026-04-14 00:21:28,403 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:29,031 - resume_rag.retrieval.vector_store - INFO - Added batch 96/193 (100 documents)
+2026-04-14 00:21:30,043 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:30,565 - resume_rag.retrieval.vector_store - INFO - Added batch 97/193 (100 documents)
+2026-04-14 00:21:31,318 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:31,944 - resume_rag.retrieval.vector_store - INFO - Added batch 98/193 (100 documents)
+2026-04-14 00:21:32,903 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:33,541 - resume_rag.retrieval.vector_store - INFO - Added batch 99/193 (100 documents)
+2026-04-14 00:21:35,031 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:35,730 - resume_rag.retrieval.vector_store - INFO - Added batch 100/193 (100 documents)
+2026-04-14 00:21:37,148 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:37,824 - resume_rag.retrieval.vector_store - INFO - Added batch 101/193 (100 documents)
+2026-04-14 00:21:38,833 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:39,381 - resume_rag.retrieval.vector_store - INFO - Added batch 102/193 (100 documents)
+2026-04-14 00:21:40,141 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:40,715 - resume_rag.retrieval.vector_store - INFO - Added batch 103/193 (100 documents)
+2026-04-14 00:21:41,451 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:42,046 - resume_rag.retrieval.vector_store - INFO - Added batch 104/193 (100 documents)
+2026-04-14 00:21:42,802 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:43,369 - resume_rag.retrieval.vector_store - INFO - Added batch 105/193 (100 documents)
+2026-04-14 00:21:44,126 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:44,749 - resume_rag.retrieval.vector_store - INFO - Added batch 106/193 (100 documents)
+2026-04-14 00:21:45,588 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:46,092 - resume_rag.retrieval.vector_store - INFO - Added batch 107/193 (100 documents)
+2026-04-14 00:21:46,967 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:47,467 - resume_rag.retrieval.vector_store - INFO - Added batch 108/193 (100 documents)
+2026-04-14 00:21:48,357 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:48,869 - resume_rag.retrieval.vector_store - INFO - Added batch 109/193 (100 documents)
+2026-04-14 00:21:49,768 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:50,318 - resume_rag.retrieval.vector_store - INFO - Added batch 110/193 (100 documents)
+2026-04-14 00:21:51,082 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:51,637 - resume_rag.retrieval.vector_store - INFO - Added batch 111/193 (100 documents)
+2026-04-14 00:21:52,859 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:53,594 - resume_rag.retrieval.vector_store - INFO - Added batch 112/193 (100 documents)
+2026-04-14 00:21:54,384 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:54,965 - resume_rag.retrieval.vector_store - INFO - Added batch 113/193 (100 documents)
+2026-04-14 00:21:56,465 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:57,381 - resume_rag.retrieval.vector_store - INFO - Added batch 114/193 (100 documents)
+2026-04-14 00:21:58,154 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:21:58,886 - resume_rag.retrieval.vector_store - INFO - Added batch 115/193 (100 documents)
+2026-04-14 00:21:59,632 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:00,472 - resume_rag.retrieval.vector_store - INFO - Added batch 116/193 (100 documents)
+2026-04-14 00:22:01,419 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:02,456 - resume_rag.retrieval.vector_store - INFO - Added batch 117/193 (100 documents)
+2026-04-14 00:22:04,229 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:04,969 - resume_rag.retrieval.vector_store - INFO - Added batch 118/193 (100 documents)
+2026-04-14 00:22:06,069 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:06,761 - resume_rag.retrieval.vector_store - INFO - Added batch 119/193 (100 documents)
+2026-04-14 00:22:07,819 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:08,574 - resume_rag.retrieval.vector_store - INFO - Added batch 120/193 (100 documents)
+2026-04-14 00:22:09,335 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:10,087 - resume_rag.retrieval.vector_store - INFO - Added batch 121/193 (100 documents)
+2026-04-14 00:22:10,846 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:11,564 - resume_rag.retrieval.vector_store - INFO - Added batch 122/193 (100 documents)
+2026-04-14 00:22:12,385 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:13,165 - resume_rag.retrieval.vector_store - INFO - Added batch 123/193 (100 documents)
+2026-04-14 00:22:14,025 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:14,725 - resume_rag.retrieval.vector_store - INFO - Added batch 124/193 (100 documents)
+2026-04-14 00:22:15,683 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:16,396 - resume_rag.retrieval.vector_store - INFO - Added batch 125/193 (100 documents)
+2026-04-14 00:22:18,516 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:19,627 - resume_rag.retrieval.vector_store - INFO - Added batch 126/193 (100 documents)
+2026-04-14 00:22:20,454 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:21,042 - resume_rag.retrieval.vector_store - INFO - Added batch 127/193 (100 documents)
+2026-04-14 00:22:22,142 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:22,820 - resume_rag.retrieval.vector_store - INFO - Added batch 128/193 (100 documents)
+2026-04-14 00:22:41,703 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:42,618 - resume_rag.retrieval.vector_store - INFO - Added batch 129/193 (100 documents)
+2026-04-14 00:22:43,624 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:44,199 - resume_rag.retrieval.vector_store - INFO - Added batch 130/193 (100 documents)
+2026-04-14 00:22:45,068 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:45,788 - resume_rag.retrieval.vector_store - INFO - Added batch 131/193 (100 documents)
+2026-04-14 00:22:46,624 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:47,378 - resume_rag.retrieval.vector_store - INFO - Added batch 132/193 (100 documents)
+2026-04-14 00:22:48,177 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:48,898 - resume_rag.retrieval.vector_store - INFO - Added batch 133/193 (100 documents)
+2026-04-14 00:22:49,911 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:50,833 - resume_rag.retrieval.vector_store - INFO - Added batch 134/193 (100 documents)
+2026-04-14 00:22:51,634 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:52,347 - resume_rag.retrieval.vector_store - INFO - Added batch 135/193 (100 documents)
+2026-04-14 00:22:55,341 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:56,341 - resume_rag.retrieval.vector_store - INFO - Added batch 136/193 (100 documents)
+2026-04-14 00:22:57,123 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:58,075 - resume_rag.retrieval.vector_store - INFO - Added batch 137/193 (100 documents)
+2026-04-14 00:22:58,853 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:22:59,596 - resume_rag.retrieval.vector_store - INFO - Added batch 138/193 (100 documents)
+2026-04-14 00:23:09,253 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:10,248 - resume_rag.retrieval.vector_store - INFO - Added batch 139/193 (100 documents)
+2026-04-14 00:23:11,670 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:12,522 - resume_rag.retrieval.vector_store - INFO - Added batch 140/193 (100 documents)
+2026-04-14 00:23:13,571 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:14,225 - resume_rag.retrieval.vector_store - INFO - Added batch 141/193 (100 documents)
+2026-04-14 00:23:15,226 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:15,986 - resume_rag.retrieval.vector_store - INFO - Added batch 142/193 (100 documents)
+2026-04-14 00:23:18,938 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:19,856 - resume_rag.retrieval.vector_store - INFO - Added batch 143/193 (100 documents)
+2026-04-14 00:23:20,822 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:21,574 - resume_rag.retrieval.vector_store - INFO - Added batch 144/193 (100 documents)
+2026-04-14 00:23:22,512 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:23,296 - resume_rag.retrieval.vector_store - INFO - Added batch 145/193 (100 documents)
+2026-04-14 00:23:24,306 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:25,172 - resume_rag.retrieval.vector_store - INFO - Added batch 146/193 (100 documents)
+2026-04-14 00:23:26,181 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:26,932 - resume_rag.retrieval.vector_store - INFO - Added batch 147/193 (100 documents)
+2026-04-14 00:23:28,000 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:28,760 - resume_rag.retrieval.vector_store - INFO - Added batch 148/193 (100 documents)
+2026-04-14 00:23:29,531 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:30,115 - resume_rag.retrieval.vector_store - INFO - Added batch 149/193 (100 documents)
+2026-04-14 00:23:30,901 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:31,481 - resume_rag.retrieval.vector_store - INFO - Added batch 150/193 (100 documents)
+2026-04-14 00:23:32,253 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:32,823 - resume_rag.retrieval.vector_store - INFO - Added batch 151/193 (100 documents)
+2026-04-14 00:23:33,695 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:34,278 - resume_rag.retrieval.vector_store - INFO - Added batch 152/193 (100 documents)
+2026-04-14 00:23:35,070 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:35,652 - resume_rag.retrieval.vector_store - INFO - Added batch 153/193 (100 documents)
+2026-04-14 00:23:36,884 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:37,657 - resume_rag.retrieval.vector_store - INFO - Added batch 154/193 (100 documents)
+2026-04-14 00:23:38,546 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:39,117 - resume_rag.retrieval.vector_store - INFO - Added batch 155/193 (100 documents)
+2026-04-14 00:23:40,015 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:40,644 - resume_rag.retrieval.vector_store - INFO - Added batch 156/193 (100 documents)
+2026-04-14 00:23:41,404 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:41,961 - resume_rag.retrieval.vector_store - INFO - Added batch 157/193 (100 documents)
+2026-04-14 00:23:42,963 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:43,586 - resume_rag.retrieval.vector_store - INFO - Added batch 158/193 (100 documents)
+2026-04-14 00:23:44,607 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:45,205 - resume_rag.retrieval.vector_store - INFO - Added batch 159/193 (100 documents)
+2026-04-14 00:23:46,055 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:46,566 - resume_rag.retrieval.vector_store - INFO - Added batch 160/193 (100 documents)
+2026-04-14 00:23:47,557 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:48,271 - resume_rag.retrieval.vector_store - INFO - Added batch 161/193 (100 documents)
+2026-04-14 00:23:49,038 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:23:49,764 - resume_rag.retrieval.vector_store - INFO - Added batch 162/193 (100 documents)
+2026-04-14 00:24:07,263 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:08,118 - resume_rag.retrieval.vector_store - INFO - Added batch 163/193 (100 documents)
+2026-04-14 00:24:13,249 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:14,159 - resume_rag.retrieval.vector_store - INFO - Added batch 164/193 (100 documents)
+2026-04-14 00:24:15,539 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:16,449 - resume_rag.retrieval.vector_store - INFO - Added batch 165/193 (100 documents)
+2026-04-14 00:24:18,193 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:19,246 - resume_rag.retrieval.vector_store - INFO - Added batch 166/193 (100 documents)
+2026-04-14 00:24:20,383 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:21,282 - resume_rag.retrieval.vector_store - INFO - Added batch 167/193 (100 documents)
+2026-04-14 00:24:23,083 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:24,165 - resume_rag.retrieval.vector_store - INFO - Added batch 168/193 (100 documents)
+2026-04-14 00:24:25,394 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:26,755 - resume_rag.retrieval.vector_store - INFO - Added batch 169/193 (100 documents)
+2026-04-14 00:24:29,405 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:30,530 - resume_rag.retrieval.vector_store - INFO - Added batch 170/193 (100 documents)
+2026-04-14 00:24:31,429 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:32,507 - resume_rag.retrieval.vector_store - INFO - Added batch 171/193 (100 documents)
+2026-04-14 00:24:33,319 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:34,327 - resume_rag.retrieval.vector_store - INFO - Added batch 172/193 (100 documents)
+2026-04-14 00:24:35,087 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:36,124 - resume_rag.retrieval.vector_store - INFO - Added batch 173/193 (100 documents)
+2026-04-14 00:24:37,311 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:38,481 - resume_rag.retrieval.vector_store - INFO - Added batch 174/193 (100 documents)
+2026-04-14 00:24:40,382 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:41,432 - resume_rag.retrieval.vector_store - INFO - Added batch 175/193 (100 documents)
+2026-04-14 00:24:42,322 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:43,509 - resume_rag.retrieval.vector_store - INFO - Added batch 176/193 (100 documents)
+2026-04-14 00:24:44,334 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:45,352 - resume_rag.retrieval.vector_store - INFO - Added batch 177/193 (100 documents)
+2026-04-14 00:24:46,224 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:47,212 - resume_rag.retrieval.vector_store - INFO - Added batch 178/193 (100 documents)
+2026-04-14 00:24:49,978 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:51,060 - resume_rag.retrieval.vector_store - INFO - Added batch 179/193 (100 documents)
+2026-04-14 00:24:52,128 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:53,256 - resume_rag.retrieval.vector_store - INFO - Added batch 180/193 (100 documents)
+2026-04-14 00:24:54,313 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:55,187 - resume_rag.retrieval.vector_store - INFO - Added batch 181/193 (100 documents)
+2026-04-14 00:24:56,362 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:57,419 - resume_rag.retrieval.vector_store - INFO - Added batch 182/193 (100 documents)
+2026-04-14 00:24:58,415 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:24:59,300 - resume_rag.retrieval.vector_store - INFO - Added batch 183/193 (100 documents)
+2026-04-14 00:25:00,354 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:25:01,410 - resume_rag.retrieval.vector_store - INFO - Added batch 184/193 (100 documents)
+2026-04-14 00:25:03,123 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:25:04,180 - resume_rag.retrieval.vector_store - INFO - Added batch 185/193 (100 documents)
+2026-04-14 00:25:05,377 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:25:06,513 - resume_rag.retrieval.vector_store - INFO - Added batch 186/193 (100 documents)
+2026-04-14 00:25:07,526 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:25:08,368 - resume_rag.retrieval.vector_store - INFO - Added batch 187/193 (100 documents)
+2026-04-14 00:25:09,134 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:25:09,899 - resume_rag.retrieval.vector_store - INFO - Added batch 188/193 (100 documents)
+2026-04-14 00:25:11,198 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:25:12,133 - resume_rag.retrieval.vector_store - INFO - Added batch 189/193 (100 documents)
+2026-04-14 00:25:12,913 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:25:13,663 - resume_rag.retrieval.vector_store - INFO - Added batch 190/193 (100 documents)
+2026-04-14 00:25:14,440 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:25:14,945 - resume_rag.retrieval.vector_store - INFO - Added batch 191/193 (100 documents)
+2026-04-14 00:25:32,953 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:25:33,866 - resume_rag.retrieval.vector_store - INFO - Added batch 192/193 (100 documents)
+2026-04-14 00:25:34,664 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:25:35,198 - resume_rag.retrieval.vector_store - INFO - Added batch 193/193 (95 documents)
+2026-04-14 00:25:35,198 - resume_rag.retrieval.vector_store - INFO - Successfully added 19295 documents to vector store
+2026-04-14 00:25:35,684 - resume_rag.retrieval.bm25_index - INFO - BM25 index size: 19295 chunks
+2026-04-14 00:25:35,902 - resume_rag.retrieval.bm25_index - INFO - Saved BM25 index to /Users/Yauheni_Semchanka/Desktop/AI_Architect/ai-rag_task/vector-db/bm25_index.pkl
+2026-04-14 00:25:35,903 - resume_rag.app.rag_system - INFO - Successfully loaded 19295 documents
+2026-04-14 00:25:36,341 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/text-embedding-005/embeddings?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:25:36,439 - resume_rag.retrieval.vector_store - INFO - Found 10 documents for query: Healthcare professionals with patient care experie...
+2026-04-14 00:25:36,482 - resume_rag.security.access_control - INFO - ACCESS_LOG: User=admin_user, Role=admin, Action=search, Resource=Healthcare professionals with patient care experience, Status=SUCCESS
+2026-04-14 00:25:36,482 - resume_rag.retrieval.hybrid_retriever - INFO - Returning 5 results for query: Healthcare professionals with patient care experie...
+2026-04-14 00:25:39,164 - httpx - INFO - HTTP Request: POST https://ai-proxy.lab.epam.com/openai/deployments/gpt-4/chat/completions?api-version=2025-01-01-preview "HTTP/1.1 200 OK"
+2026-04-14 00:25:39,183 - resume_rag.security.access_control - INFO - ACCESS_LOG: User=admin_user, Role=admin, Action=generate_answer, Resource=Healthcare professionals with patient care experience, Status=SUCCESS

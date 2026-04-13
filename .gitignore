@@ -35,3 +35,6 @@ reports/
 # OS
 .DS_Store
 Thumbs.db
+
+# Local DB
+vector-db/

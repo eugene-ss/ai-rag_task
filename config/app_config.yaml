@@ -1,0 +1,70 @@
+# Application config
+app:
+  name: "Resume RAG Task"
+  version: "0.1.0"
+  log_level: "INFO"
+
+# LLM config
+llm:
+  model: gpt-4
+  api_version: 2025-01-01-preview
+  temperature: 0.0
+  max_tokens: 16000
+  deployment_name: gpt-4
+
+# Embedding config
+embeddings:
+  model: text-embedding-005
+  chunk_size: 2048
+  deployment_name: text-embedding-005
+
+# Text Splitting config
+text_splitter:
+  chunk_size: 1024
+  chunk_overlap: 200
+
+# Storage config
+storage:
+  chroma_db_path: "chroma_db"
+  evaluation_results_path: "evaluation_results"
+  logs_path: "logs"
+
+# Access Control config
+access_control:
+  department_categories:
+    IT: ["INFORMATION-TECHNOLOGY", "ENGINEERING"]
+    HR: ["HR", "BUSINESS-DEVELOPMENT"]
+    Healthcare: ["HEALTHCARE", "FITNESS"]
+    Finance: ["FINANCE", "ACCOUNTANT", "BANKING"]
+    Sales: ["SALES", "BPO", "DIGITAL-MEDIA"]
+    Legal: ["ADVOCATE"]
+    Education: ["TEACHER"]
+    Creative: ["DESIGNER", "ARTS", "CHEF", "APPAREL"]
+    Operations: ["CONSTRUCTION", "AGRICULTURE", "AUTOMOBILE", "AVIATION", "CONSULTANT", "PUBLIC-RELATIONS"]
+
+# Evaluation config
+evaluation:
+  precision_k_values: [1, 3, 5, 10]
+  recall_k_values: [1, 3, 5, 10]
+  max_docs_for_evaluation: 10
+  eval_labels_path: "eval_labels.json"
+
+# BM25 + dense Chroma, fused with RRF (or weighted ranks)
+hybrid_search:
+  enabled: true
+  sparse_k: 50
+  rrf_k: 60
+  fusion: "rrf"
+  dense_weight: 0.5
+  sparse_weight: 0.5
+  bm25_persist_filename: "bm25_index.pkl"
+
+# Answer generation: JSON schema as structured LLM output
+structured_output:
+  enabled: true
+  max_context_chars: 12000
+
+# Normalization; extract headline/skills metadata from resume text
+document_processing:
+  normalize_text: true
+  extract_headline_skills: true

@@ -1,0 +1,16 @@
+{
+  "labels": [
+    {
+      "query": "Find Python developers with machine learning experience",
+      "relevant_resume_ids": ["62994611", "26480367"]
+    },
+    {
+      "query": "Healthcare professionals with patient care experience",
+      "relevant_resume_ids": ["23138078"]
+    },
+    {
+      "query": "Financial analysts with Excel and data analysis skills",
+      "relevant_resume_ids": ["24703983"]
+    }
+  ]
+}

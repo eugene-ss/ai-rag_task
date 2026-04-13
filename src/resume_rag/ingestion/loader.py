@@ -1,0 +1,172 @@
+import logging
+from collections import defaultdict
+from pathlib import Path
+from typing import List
+
+import pandas as pd
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_core.documents import Document
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+from resume_rag.domain.models import DocumentMetadata, EvaluationQuery
+from resume_rag.ingestion.resume_text import (
+    extract_headline,
+    extract_skills_line,
+    normalize_resume_text,
+)
+
+logger = logging.getLogger(__name__)
+
+def assign_chunk_metadata(chunks: List[Document]) -> List[Document]:
+    if not chunks:
+        return chunks
+    by_id: defaultdict[str, List[int]] = defaultdict(list)
+    for i, c in enumerate(chunks):
+        meta = c.metadata if isinstance(c.metadata, dict) else {}
+        rid = str(meta.get("id", i))
+        by_id[rid].append(i)
+    out = list(chunks)
+    for rid, indices in by_id.items():
+        n = len(indices)
+        for j, idx in enumerate(indices):
+            ch = out[idx]
+            md = dict(ch.metadata) if isinstance(ch.metadata, dict) else {}
+            md["chunk_index"] = j
+            md["total_chunks"] = n
+            md["chunk_uid"] = f"{rid}:{j}"
+            out[idx] = Document(page_content=ch.page_content, metadata=md)
+    return out
+
+class DocumentLoader:
+    def __init__(self, config_manager):
+        self.config = config_manager
+        text_config = config_manager.get_text_splitter_config()
+
+        self.text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=text_config.chunk_size,
+            chunk_overlap=text_config.chunk_overlap,
+        )
+
+    def _doc_processing(self):
+        return self.config.app_settings.document_processing
+
+    def load_dataset(self, csv_filename: str = "Resume.csv", load_pdfs: bool = False) -> List[Document]:
+        # Load resume dataset from CSV and PDF files
+        csv_path = self.config.data_dir / csv_filename
+
+        if not csv_path.exists():
+            raise FileNotFoundError(f"CSV file not found: {csv_path}")
+
+        documents = []
+        df = pd.read_csv(csv_path)
+        logger.info(f"Loading {len(df)} resumes from {csv_path}")
+        dp = self._doc_processing()
+
+        for idx, row in df.iterrows():
+            if "Resume_str" in row and pd.notna(row["Resume_str"]):
+                text = str(row["Resume_str"])
+                if dp.normalize_text:
+                    text = normalize_resume_text(text)
+
+                headline = None
+                skills = None
+                if dp.extract_headline_skills:
+                    headline = extract_headline(text)
+                    skills = extract_skills_line(text)
+
+                try:
+                    oi = int(idx)
+                except (TypeError, ValueError):
+                    oi = None
+                metadata = DocumentMetadata(
+                    id=str(row.get("ID", idx)),
+                    category=str(row.get("Category", "Unknown")),
+                    source="csv",
+                    original_index=oi,
+                    headline=headline,
+                    skills=skills,
+                )
+
+                doc = Document(
+                    page_content=text,
+                    metadata=metadata.model_dump(exclude_none=True),
+                )
+                documents.append(doc)
+
+            if load_pdfs and "ID" in row and "Category" in row:
+                pdf_path = self.config.data_dir / str(row["Category"]) / f"{row['ID']}.pdf"
+                if pdf_path.exists():
+                    pdf_docs = self._load_pdf(pdf_path, row)
+                    documents.extend(pdf_docs)
+
+        chunked = self.chunk_documents(documents)
+        return assign_chunk_metadata(chunked)
+
+    def chunk_documents(self, documents: List[Document]) -> List[Document]:
+        if not documents:
+            return []
+        chunked_docs = self.text_splitter.split_documents(documents)
+        logger.info(
+            f"Created {len(chunked_docs)} document chunks from {len(documents)} documents"
+        )
+        return assign_chunk_metadata(chunked_docs)
+
+    def _load_pdf(self, pdf_path: Path, row: pd.Series) -> List[Document]:
+        loader = PyPDFLoader(str(pdf_path))
+        docs = loader.load()
+        dp = self._doc_processing()
+
+        for doc in docs:
+            text = doc.page_content or ""
+            if dp.normalize_text:
+                text = normalize_resume_text(text)
+            headline = None
+            skills = None
+            if dp.extract_headline_skills:
+                headline = extract_headline(text)
+                skills = extract_skills_line(text)
+            metadata = DocumentMetadata(
+                id=str(row["ID"]),
+                category=str(row["Category"]),
+                source="pdf",
+                file_path=str(pdf_path),
+                headline=headline,
+                skills=skills,
+            )
+            doc.page_content = text
+            doc.metadata = metadata.model_dump(exclude_none=True)
+
+        return docs
+
+    @staticmethod
+    def get_evaluation_queries(self) -> List[EvaluationQuery]:
+        # Pre-defined evaluation queries
+        queries_data = [
+            {
+                "query": "Find Python developers with machine learning experience",
+                "relevant_categories": ["INFORMATION-TECHNOLOGY", "ENGINEERING"],
+                "keywords": ["python", "machine learning", "ml", "ai", "tensorflow", "pytorch"],
+            },
+            {
+                "query": "Healthcare professionals with patient care experience",
+                "relevant_categories": ["HEALTHCARE", "FITNESS"],
+                "keywords": ["patient", "care", "medical", "nursing", "healthcare", "clinical"],
+            },
+            {
+                "query": "Financial analysts with Excel and data analysis skills",
+                "relevant_categories": ["FINANCE", "ACCOUNTANT", "BANKING"],
+                "keywords": ["excel", "financial", "analysis", "accounting", "data", "spreadsheet"],
+            },
+            {
+                "query": "Software engineers with web development experience",
+                "relevant_categories": ["INFORMATION-TECHNOLOGY", "ENGINEERING"],
+                "keywords": ["web development", "javascript", "html", "css", "react", "angular", "vue"],
+            },
+            {
+                "query": "Sales professionals with B2B experience",
+                "relevant_categories": ["SALES", "BUSINESS-DEVELOPMENT"],
+                "keywords": ["sales", "b2b", "business development", "client", "revenue", "crm"],
+            },
+        ]
+
+        return [EvaluationQuery(**query_data) for query_data in queries_data]
