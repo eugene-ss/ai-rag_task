@@ -60,7 +60,7 @@ class RAGSystem:
         if len(self.bm25_index) > 0:
             self.bm25_index.save(self._bm25_path)
 
-    def _sync_bm25_after_mutation(self) -> None:
+    def _sync_bm25_full_rebuild(self) -> None:
         if not self.config.app_settings.hybrid_search.enabled:
             return
         self.bm25_index.rebuild_from_chroma(self.vector_store.vectorstore)
@@ -76,8 +76,10 @@ class RAGSystem:
 
         self.vector_store.add_documents(documents)
         if self.config.app_settings.hybrid_search.enabled:
-            self.bm25_index.clear()
-            self.bm25_index.add_documents(documents)
+            if len(self.bm25_index) == 0:
+                self.bm25_index.add_documents(documents)
+            else:
+                self.bm25_index.upsert_documents(documents)
             self.bm25_index.save(self._bm25_path)
 
         logger.info("Successfully loaded %s documents", len(documents))
@@ -139,7 +141,9 @@ class RAGSystem:
             logger.error("Update produced no chunks after splitting")
             return False
         self.vector_store.add_documents(chunks)
-        self._sync_bm25_after_mutation()
+        if self.config.app_settings.hybrid_search.enabled:
+            self.bm25_index.upsert_documents(chunks)
+            self.bm25_index.save(self._bm25_path)
 
         if user:
             self.access_control.log_access(user, "update_document", doc_id, True)
@@ -168,7 +172,11 @@ class RAGSystem:
                 )
             return False
 
-        self._sync_bm25_after_mutation()
+        if self.config.app_settings.hybrid_search.enabled:
+            for did in valid_ids:
+                self.bm25_index.remove_by_doc_id(did)
+            if len(self.bm25_index) > 0:
+                self.bm25_index.save(self._bm25_path)
 
         if user:
             self.access_control.log_access(
@@ -187,7 +195,7 @@ class RAGSystem:
         if not eval_queries:
             raise ValueError("No evaluation queries available")
 
-        results = self.evaluator.run_evaluation(self, eval_queries)
+        results = self.evaluator.run_evaluation(self, eval_queries, user=user)
 
         self._print_evaluation_summary(results)
 
@@ -197,6 +205,45 @@ class RAGSystem:
             )
 
         return results
+
+    def run_evaluation_per_role(
+        self,
+        roles: Optional[List[str]] = None,
+    ) -> Dict[str, EvaluationResults]:
+        """Run evaluation once per role to verify access control impact."""
+        from resume_rag.domain.models import Role
+
+        if roles is None:
+            roles = [r.value for r in Role]
+
+        per_role: Dict[str, EvaluationResults] = {}
+        for role_name in roles:
+            try:
+                role = Role(role_name)
+            except ValueError:
+                logger.warning("Unknown role %s, skipping", role_name)
+                continue
+
+            dept_map = {"hr_manager": "HR", "recruiter": "HR", "analyst": "IT"}
+            user = User(
+                user_id=f"eval_{role_name}",
+                role=role,
+                department=dept_map.get(role_name),
+            )
+
+            if not self.access_control.check_permission(user, Permission.ANALYZE):
+                if role != Role.ADMIN:
+                    logger.info("Role %s lacks ANALYZE; skipping", role_name)
+                    continue
+
+            logger.info("Running evaluation as role=%s", role_name)
+            try:
+                result = self.run_evaluation(user=user)
+                per_role[role_name] = result
+            except PermissionError:
+                logger.info("Role %s denied evaluation", role_name)
+
+        return per_role
 
     def _print_evaluation_summary(self, results: EvaluationResults):
         print("\n" + "=" * 50)
@@ -208,7 +255,9 @@ class RAGSystem:
                 metric_name = metric[4:].replace("_", " ").title()
                 print(f"{metric_name:.<30} {value:.3f}")
 
-        print(f"\nTotal Queries Evaluated: {results.total_queries}")
+        labeled = results.summary.get("labeled_query_count", 0)
+        total = results.summary.get("total_query_count", results.total_queries)
+        print(f"\nTotal Queries Evaluated: {int(total)} (Labeled: {int(labeled)})")
         print("=" * 50)
 
     def get_system_stats(self) -> Dict[str, Any]:

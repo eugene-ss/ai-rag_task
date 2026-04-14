@@ -1,14 +1,14 @@
 import logging
 from collections import defaultdict
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 import pandas as pd
-from langchain_community.document_loaders import PyPDFLoader
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from resume_rag.domain.models import DocumentMetadata, EvaluationQuery
+from resume_rag.ingestion.multimodal_pdf import extract_pdf_elements, get_available_backend
 from resume_rag.ingestion.resume_text import (
     extract_headline,
     extract_skills_line,
@@ -38,14 +38,16 @@ def assign_chunk_metadata(chunks: List[Document]) -> List[Document]:
     return out
 
 class DocumentLoader:
-    def __init__(self, config_manager):
+    def __init__(self, config_manager, vision_llm=None):
         self.config = config_manager
+        self.vision_llm = vision_llm
         text_config = config_manager.get_text_splitter_config()
 
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=text_config.chunk_size,
             chunk_overlap=text_config.chunk_overlap,
         )
+        logger.info("PDF backend: %s", get_available_backend())
 
     def _doc_processing(self):
         return self.config.app_settings.document_processing
@@ -105,42 +107,60 @@ class DocumentLoader:
     def chunk_documents(self, documents: List[Document]) -> List[Document]:
         if not documents:
             return []
-        chunked_docs = self.text_splitter.split_documents(documents)
+
+        text_docs = []
+        passthrough_docs = []
+        for doc in documents:
+            st = (doc.metadata or {}).get("source_type", "text")
+            if st in ("table", "image_description"):
+                passthrough_docs.append(doc)
+            else:
+                text_docs.append(doc)
+
+        chunked_docs = self.text_splitter.split_documents(text_docs) if text_docs else []
+        chunked_docs.extend(passthrough_docs)
+
         logger.info(
-            f"Created {len(chunked_docs)} document chunks from {len(documents)} documents"
+            "Created %d chunks from %d documents (text-split=%d, passthrough=%d)",
+            len(chunked_docs), len(documents),
+            len(chunked_docs) - len(passthrough_docs), len(passthrough_docs),
         )
         return assign_chunk_metadata(chunked_docs)
 
     def _load_pdf(self, pdf_path: Path, row: pd.Series) -> List[Document]:
-        loader = PyPDFLoader(str(pdf_path))
-        docs = loader.load()
+        raw_docs = extract_pdf_elements(str(pdf_path), vision_llm=self.vision_llm)
         dp = self._doc_processing()
+        out: List[Document] = []
 
-        for doc in docs:
+        for doc in raw_docs:
             text = doc.page_content or ""
-            if dp.normalize_text:
+            source_type = (doc.metadata or {}).get("source_type", "text")
+
+            if source_type == "text" and dp.normalize_text:
                 text = normalize_resume_text(text)
+
             headline = None
             skills = None
-            if dp.extract_headline_skills:
+            if source_type == "text" and dp.extract_headline_skills:
                 headline = extract_headline(text)
                 skills = extract_skills_line(text)
+
             metadata = DocumentMetadata(
                 id=str(row["ID"]),
                 category=str(row["Category"]),
                 source="pdf",
+                source_type=source_type,
                 file_path=str(pdf_path),
                 headline=headline,
                 skills=skills,
             )
             doc.page_content = text
             doc.metadata = metadata.model_dump(exclude_none=True)
+            out.append(doc)
 
-        return docs
+        return out
 
-    @staticmethod
     def get_evaluation_queries(self) -> List[EvaluationQuery]:
-        # Pre-defined evaluation queries
         queries_data = [
             {
                 "query": "Find Python developers with machine learning experience",
@@ -166,6 +186,56 @@ class DocumentLoader:
                 "query": "Sales professionals with B2B experience",
                 "relevant_categories": ["SALES", "BUSINESS-DEVELOPMENT"],
                 "keywords": ["sales", "b2b", "business development", "client", "revenue", "crm"],
+            },
+            {
+                "query": "HR managers with recruitment and talent acquisition background",
+                "relevant_categories": ["HR", "BUSINESS-DEVELOPMENT"],
+                "keywords": ["recruitment", "talent acquisition", "hiring", "onboarding", "hr"],
+            },
+            {
+                "query": "Teachers with curriculum development and classroom management skills",
+                "relevant_categories": ["TEACHER"],
+                "keywords": ["curriculum", "teaching", "classroom", "education", "instruction"],
+            },
+            {
+                "query": "Graphic designers with UI/UX and Adobe Creative Suite expertise",
+                "relevant_categories": ["DESIGNER", "ARTS", "DIGITAL-MEDIA"],
+                "keywords": ["ui", "ux", "adobe", "photoshop", "illustrator", "figma", "design"],
+            },
+            {
+                "query": "Accountants with auditing and tax compliance experience",
+                "relevant_categories": ["ACCOUNTANT", "FINANCE"],
+                "keywords": ["audit", "tax", "compliance", "accounting", "gaap", "cpa"],
+            },
+            {
+                "query": "Construction project managers with safety certification",
+                "relevant_categories": ["CONSTRUCTION", "ENGINEERING"],
+                "keywords": ["construction", "project management", "safety", "osha", "site"],
+            },
+            {
+                "query": "Data engineers with cloud computing and ETL pipeline experience",
+                "relevant_categories": ["INFORMATION-TECHNOLOGY", "ENGINEERING"],
+                "keywords": ["data engineering", "etl", "cloud", "aws", "azure", "spark", "pipeline"],
+            },
+            {
+                "query": "Legal professionals with corporate law and contract negotiation skills",
+                "relevant_categories": ["ADVOCATE"],
+                "keywords": ["law", "legal", "contract", "litigation", "corporate", "compliance"],
+            },
+            {
+                "query": "Fitness trainers with nutrition certification and wellness coaching",
+                "relevant_categories": ["FITNESS", "HEALTHCARE"],
+                "keywords": ["fitness", "nutrition", "training", "wellness", "coaching", "certified"],
+            },
+            {
+                "query": "Banking professionals with risk management and regulatory compliance",
+                "relevant_categories": ["BANKING", "FINANCE"],
+                "keywords": ["banking", "risk", "regulatory", "compliance", "financial", "credit"],
+            },
+            {
+                "query": "Aviation engineers with maintenance and safety inspection background",
+                "relevant_categories": ["AVIATION", "ENGINEERING"],
+                "keywords": ["aviation", "aircraft", "maintenance", "safety", "inspection", "faa"],
             },
         ]
 

@@ -1,5 +1,5 @@
-from typing import Any, List, Dict, Optional
-from langchain_community.vectorstores import Chroma
+from typing import Any, List, Dict, Optional, Set
+from langchain_chroma import Chroma
 from langchain_core.documents import Document
 
 from resume_rag.retrieval.embeddings import build_azure_embeddings
@@ -18,18 +18,50 @@ class VectorStore:
         )
         logger.info(f"Initialized vector store at {config_manager.chroma_persist_dir}")
 
+    def _existing_chunk_uids(self) -> Set[str]:
+        coll = self._chroma_collection()
+        if coll is None or coll.count() == 0:
+            return set()
+        batch = coll.get(include=["metadatas"])
+        metas = batch.get("metadatas") or []
+        return {
+            str(m.get("chunk_uid"))
+            for m in metas
+            if m and m.get("chunk_uid")
+        }
+
+    def has_document(self, doc_id: str) -> bool:
+        coll = self._chroma_collection()
+        if coll is None:
+            return False
+        result = coll.get(where={"id": doc_id}, include=[])
+        return bool(result and result.get("ids"))
+
     def add_documents(self, documents: List[Document], batch_size: int = 100):
-        """Add documents to vector store"""
-        total_batches = (len(documents) + batch_size - 1) // batch_size
+        existing_uids = self._existing_chunk_uids()
+        new_docs = []
+        for doc in documents:
+            uid = (doc.metadata or {}).get("chunk_uid")
+            if uid and str(uid) in existing_uids:
+                continue
+            new_docs.append(doc)
 
-        for i in range(0, len(documents), batch_size):
-            batch = documents[i:i + batch_size]
+        if not new_docs:
+            logger.info("All %d documents already indexed; nothing to add", len(documents))
+            return
+
+        skipped = len(documents) - len(new_docs)
+        if skipped:
+            logger.info("Skipping %d already-indexed chunks", skipped)
+
+        total_batches = (len(new_docs) + batch_size - 1) // batch_size
+        for i in range(0, len(new_docs), batch_size):
+            batch = new_docs[i:i + batch_size]
             batch_num = i // batch_size + 1
-
             self.vectorstore.add_documents(batch)
             logger.info(f"Added batch {batch_num}/{total_batches} ({len(batch)} documents)")
 
-        logger.info(f"Successfully added {len(documents)} documents to vector store")
+        logger.info(f"Successfully added {len(new_docs)} documents to vector store")
 
     def _chroma_collection(self):
         return getattr(self.vectorstore, "_collection", None)

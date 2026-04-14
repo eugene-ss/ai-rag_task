@@ -2,7 +2,7 @@ import json
 import logging
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Any, Dict, List, Tuple
 
 import numpy as np
 
@@ -41,7 +41,7 @@ class Evaluator:
 
     @staticmethod
     def precision_at_k(retrieved: List[SearchResult], relevant_ids: List[str], k: int) -> float:
-        """Calculate Precision."""
+        # Calculate Precision
         if not retrieved or k <= 0:
             return 0.0
 
@@ -55,7 +55,7 @@ class Evaluator:
         return relevant_count / k
 
     def recall_at_k(self, retrieved: List[SearchResult], relevant_ids: List[str], k: int) -> float:
-        """Calculate Recall."""
+        # Calculate Recall
         if not relevant_ids or not retrieved or k <= 0:
             return 0.0
 
@@ -123,14 +123,20 @@ class Evaluator:
         retrieved: List[SearchResult],
         answer: str,
         relevant_ids: List[str],
+        has_labels: bool = False,
     ) -> EvaluationMetrics:
-        metrics_data: Dict = {"query": query}
+        metrics_data: Dict = {"query": query, "has_labels": has_labels}
 
-        for k in self.eval_config.precision_k_values:
-            metrics_data[f"precision_at_{k}"] = self.precision_at_k(retrieved, relevant_ids, k)
-
-        for k in self.eval_config.recall_k_values:
-            metrics_data[f"recall_at_{k}"] = self.recall_at_k(retrieved, relevant_ids, k)
+        if has_labels and relevant_ids:
+            for k in self.eval_config.precision_k_values:
+                metrics_data[f"precision_at_{k}"] = self.precision_at_k(retrieved, relevant_ids, k)
+            for k in self.eval_config.recall_k_values:
+                metrics_data[f"recall_at_{k}"] = self.recall_at_k(retrieved, relevant_ids, k)
+        else:
+            for k in self.eval_config.precision_k_values:
+                metrics_data[f"precision_at_{k}"] = 0.0
+            for k in self.eval_config.recall_k_values:
+                metrics_data[f"recall_at_{k}"] = 0.0
 
         answer_eval = self._answer_text_for_eval(answer)
 
@@ -145,6 +151,7 @@ class Evaluator:
             if n_excerpts == 0:
                 metrics_data["faithfulness"] = 0.0
                 metrics_data["groundedness"] = 0.0
+                metrics_data["answer_completeness"] = 0.0
                 metrics_data["avg_relevance"] = 0.0
             else:
                 parsed = self._evaluation_quality(
@@ -152,12 +159,14 @@ class Evaluator:
                 )
                 metrics_data["faithfulness"] = float(parsed.faithfulness)
                 metrics_data["groundedness"] = float(parsed.groundedness)
+                metrics_data["answer_completeness"] = float(parsed.answer_completeness)
                 metrics_data["avg_relevance"] = self._avg_relevance_from_parsed(
                     parsed, n_excerpts
                 )
         else:
             metrics_data["faithfulness"] = 0.0
             metrics_data["groundedness"] = 0.0
+            metrics_data["answer_completeness"] = 0.0
             metrics_data["avg_relevance"] = 0.0
 
         return EvaluationMetrics(**metrics_data)
@@ -201,7 +210,12 @@ class Evaluator:
 
         return list(dict.fromkeys(relevant_ids))
 
-    def run_evaluation(self, rag_system, eval_queries: List[EvaluationQuery]) -> EvaluationResults:
+    def run_evaluation(
+        self,
+        rag_system,
+        eval_queries: List[EvaluationQuery],
+        user=None,
+    ) -> EvaluationResults:
         logger.info("Starting evaluation on %s queries", len(eval_queries))
 
         labels_path = self.config.data_dir / self.eval_config.eval_labels_path
@@ -213,54 +227,75 @@ class Evaluator:
             logger.info("Evaluating query %s/%s: %s", i + 1, len(eval_queries), eval_query.query)
 
             retrieved = rag_system.search(
-                eval_query.query, k=self.eval_config.max_docs_for_evaluation
+                eval_query.query, k=self.eval_config.max_docs_for_evaluation,
+                user=user,
             )
 
             if not retrieved:
                 logger.warning("No results for query: %s", eval_query.query)
                 continue
 
-            answer = rag_system.generate_answer(eval_query.query, retrieved[:3])
+            answer = rag_system.generate_answer(eval_query.query, retrieved[:3], user=user)
 
-            if eval_query.query in labels_map:
+            has_labels = eval_query.query in labels_map
+            if has_labels:
                 relevant_ids = list(dict.fromkeys(labels_map[eval_query.query]))
                 logger.info("Using labeled relevant_resume_ids (count=%s)", len(relevant_ids))
             else:
-                relevant_ids = self.identify_relevant_docs_heuristic(retrieved, eval_query)
+                relevant_ids = []
+                logger.info("No labels for query; P@K/R@K will be 0 (LLM quality metrics still computed)")
 
             metrics = self.evaluate_query(
                 eval_query.query,
                 retrieved,
                 answer,
                 relevant_ids,
+                has_labels=has_labels,
             )
             all_metrics.append(metrics)
 
             logger.info(
-                "Results - P@1: %.3f, R@5: %.3f, Faithfulness: %.3f",
+                "Results - P@1: %.3f, R@5: %.3f, Faithfulness: %.3f, Completeness: %.3f",
                 metrics.precision_at_1,
                 metrics.recall_at_5,
                 metrics.faithfulness,
+                metrics.answer_completeness,
             )
 
         if not all_metrics:
             raise ValueError("No queries were successfully evaluated")
 
-        summary = {}
-        metric_names = [
+        labeled_metrics = [m for m in all_metrics if m.has_labels]
+
+        summary: Dict[str, float] = {}
+        retrieval_metric_names = [
             "precision_at_1", "precision_at_3", "precision_at_5", "precision_at_10",
             "recall_at_1", "recall_at_3", "recall_at_5", "recall_at_10",
-            "faithfulness", "groundedness", "avg_relevance",
+        ]
+        quality_metric_names = [
+            "faithfulness", "groundedness", "answer_completeness", "avg_relevance",
         ]
 
-        for metric_name in metric_names:
+        source = labeled_metrics if labeled_metrics else all_metrics
+        for metric_name in retrieval_metric_names:
+            values = [getattr(m, metric_name) for m in source]
+            summary[f"avg_{metric_name}"] = float(np.mean(values)) if values else 0.0
+            summary[f"std_{metric_name}"] = float(np.std(values)) if values else 0.0
+
+        for metric_name in quality_metric_names:
             values = [getattr(m, metric_name) for m in all_metrics]
             summary[f"avg_{metric_name}"] = float(np.mean(values)) if values else 0.0
             summary[f"std_{metric_name}"] = float(np.std(values)) if values else 0.0
 
-        logger.info("Evaluation completed. Successful: %s", len(all_metrics))
+        summary["labeled_query_count"] = float(len(labeled_metrics))
+        summary["total_query_count"] = float(len(all_metrics))
 
-        self._save_evaluation_results(all_metrics, summary)
+        logger.info(
+            "Evaluation completed. Total: %s, Labeled: %s",
+            len(all_metrics), len(labeled_metrics),
+        )
+
+        self._save_evaluation_results(all_metrics, summary, user=user)
 
         return EvaluationResults(
             summary=summary,
@@ -268,12 +303,44 @@ class Evaluator:
             total_queries=len(all_metrics),
         )
 
-    def _save_evaluation_results(self, all_metrics: List[EvaluationMetrics], summary: Dict[str, float]):
+    def _build_run_metadata(self, user=None) -> Dict[str, Any]:
+        """Capture config snapshot and environment for reproducibility."""
+        meta: Dict[str, Any] = {}
+        try:
+            llm = self.config.get_llm_config()
+            emb = self.config.get_embedding_config()
+            ts = self.config.get_text_splitter_config()
+            hy = self.config.app_settings.hybrid_search
+            meta = {
+                "llm_model": llm.model,
+                "llm_deployment": llm.deployment_name,
+                "llm_temperature": llm.temperature,
+                "embedding_model": emb.model,
+                "chunk_size": ts.chunk_size,
+                "chunk_overlap": ts.chunk_overlap,
+                "hybrid_search_enabled": hy.enabled,
+                "hybrid_fusion": hy.fusion,
+                "eval_labels_path": self.eval_config.eval_labels_path,
+            }
+            if user:
+                meta["eval_user_role"] = str(getattr(user, "role", "none"))
+                meta["eval_user_department"] = getattr(user, "department", None)
+        except Exception as exc:
+            logger.debug("Could not capture full run metadata: %s", exc)
+        return meta
+
+    def _save_evaluation_results(
+        self,
+        all_metrics: List[EvaluationMetrics],
+        summary: Dict[str, float],
+        user=None,
+    ):
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         results_file = Path(self.config.evaluation_results_dir) / f"evaluation_{timestamp}.json"
 
         results_data = {
             "timestamp": timestamp,
+            "run_metadata": self._build_run_metadata(user),
             "summary": summary,
             "individual_results": [metrics.model_dump() for metrics in all_metrics],
             "total_queries": len(all_metrics),

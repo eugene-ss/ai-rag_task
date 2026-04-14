@@ -28,7 +28,7 @@ class DocumentMetadata(BaseModel):
 
     id: str = Field(..., description="Document unique identifier")
     category: str = Field(..., description="Resume category")
-    source: str = Field(..., description="Document source (csv, pdf)")
+    source: str = Field(..., description="Document source (csv, pdf, table, image_description)")
     file_path: Optional[str] = Field(None, description="Original file path")
     original_index: Optional[int] = Field(None, description="Original CSV index")
     headline: Optional[str] = Field(None, description="Short title line from resume")
@@ -39,6 +39,9 @@ class DocumentMetadata(BaseModel):
     chunk_index: Optional[int] = Field(None, description="0-based chunk within logical resume")
     total_chunks: Optional[int] = Field(None, description="Chunk count for this resume id")
     chunk_uid: Optional[str] = Field(None, description="Stable id for hybrid fusion (id:chunk_idx)")
+    owner_id: Optional[str] = Field(None, description="User ID of the document owner/uploader")
+    access_list: Optional[List[str]] = Field(None, description="User IDs explicitly granted access")
+    source_type: Optional[str] = Field(None, description="Content type: text, table, image_description")
 
 class ResumeDocument(BaseModel):
     page_content: str = Field(..., min_length=1, description="Document content")
@@ -68,8 +71,10 @@ class EvaluationMetrics(BaseModel):
     recall_at_10: float = Field(..., ge=0.0, le=1.0)
     faithfulness: float = Field(..., ge=0.0, le=1.0)
     groundedness: float = Field(..., ge=0.0, le=1.0)
+    answer_completeness: float = Field(default=0.5, ge=0.0, le=1.0)
     avg_relevance: float = Field(..., ge=0.0, le=1.0)
     query: str = Field(..., description="Original query")
+    has_labels: bool = Field(default=False, description="Whether gold labels were available")
 
 class EvaluationResults(BaseModel):
     summary: Dict[str, float] = Field(..., description="Average metrics")
@@ -163,6 +168,12 @@ class ExcerptRelevanceScore(BaseModel):
 class EvaluationQualityScores(BaseModel):
     faithfulness: float = Field(..., ge=0.0, le=1.0)
     groundedness: float = Field(..., ge=0.0, le=1.0)
+    answer_completeness: float = Field(
+        default=0.5,
+        ge=0.0,
+        le=1.0,
+        description="How completely the answer addresses all aspects of the query",
+    )
     relevance_scores: List[ExcerptRelevanceScore] = Field(
         default_factory=list,
         description="One entry per numbered excerpt, query relevance 0-1",

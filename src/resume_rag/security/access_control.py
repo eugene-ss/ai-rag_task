@@ -1,4 +1,8 @@
+import json
+from datetime import datetime, timezone
+from pathlib import Path
 from typing import List, Dict, Any, Optional, Set
+
 from resume_rag.domain.models import User, Role, Permission
 import logging
 
@@ -9,7 +13,6 @@ class AccessControl:
         self.config = config_manager
         access_config = config_manager.get_access_control_config()
 
-        # Role-based permissions
         self.role_permissions = {
             Role.ADMIN: {Permission.READ, Permission.WRITE, Permission.DELETE, Permission.ANALYZE},
             Role.HR_MANAGER: {Permission.READ, Permission.ANALYZE},
@@ -19,13 +22,15 @@ class AccessControl:
 
         self.department_categories = access_config.department_categories
 
+        self._audit_dir = Path(config_manager.results_dir) / "audit"
+        self._audit_dir.mkdir(parents=True, exist_ok=True)
+        self._audit_file = self._audit_dir / "access_audit.jsonl"
+
     @staticmethod
     def validate_user(user_data: Dict[str, Any]) -> User:
-        # Create a user
         return User(**user_data)
 
     def check_permission(self, user: User, permission: Permission) -> bool:
-        # If a user has the permissions
         if not isinstance(user, User):
             logger.error("Invalid user object")
             return False
@@ -44,20 +49,22 @@ class AccessControl:
             logger.error("Invalid user object")
             return None
 
-        # Admin can see all categories
         if user.role == Role.ADMIN:
-            return None # all categories
+            return None
 
-        # Use explicitly set allowed categories if available
         if user.allowed_categories:
             return user.allowed_categories
 
-        # Use department-based categories
         if user.department and user.department in self.department_categories:
             return set(self.department_categories[user.department])
 
-        # Default: No specific restrictions
-        return None
+        # Deny-all for non-admin users without department or explicit categories
+        logger.warning(
+            "User %s (role=%s) has no department or allowed_categories; "
+            "defaulting to empty set (no access)",
+            user.user_id, user.role,
+        )
+        return set()
 
     def create_filter(self, user: User) -> Optional[Dict[str, Any]]:
         if not isinstance(user, User):
@@ -67,12 +74,14 @@ class AccessControl:
         allowed_categories = self.get_allowed_categories(user)
 
         if allowed_categories is None:
-            return None  # No filtering needed
+            return None
+
+        if not allowed_categories:
+            return {"category": {"$in": ["__NONE__"]}}
 
         return {"category": {"$in": list(allowed_categories)}}
 
     def filter_results(self, user: User, results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        # Filter the results based on user access rights
         if not isinstance(user, User):
             logger.error("Invalid user object")
             return []
@@ -80,17 +89,14 @@ class AccessControl:
         if not results:
             return results
 
-        # Admin sees everything
         if user.role == Role.ADMIN:
             return results
 
         allowed_categories = self.get_allowed_categories(user)
 
-        # If no category restrictions, return all results
         if allowed_categories is None:
             return results
 
-        # Filter results by allowed categories
         filtered_results = []
         for result in results:
             document = result.get("document") if isinstance(result, dict) else None
@@ -98,10 +104,18 @@ class AccessControl:
 
             if isinstance(metadata, dict):
                 doc_category = metadata.get("category", "Unknown")
+                doc_access_list = metadata.get("access_list")
+                doc_owner = metadata.get("owner_id")
             else:
                 doc_category = getattr(metadata, "category", "Unknown")
+                doc_access_list = getattr(metadata, "access_list", None)
+                doc_owner = getattr(metadata, "owner_id", None)
 
-            if doc_category in allowed_categories:
+            if doc_owner and doc_owner == user.user_id:
+                filtered_results.append(result)
+            elif doc_access_list and user.user_id in doc_access_list:
+                filtered_results.append(result)
+            elif doc_category in allowed_categories:
                 filtered_results.append(result)
             else:
                 logger.debug(f"Filtered out document with category {doc_category} for user {user.user_id}")
@@ -110,7 +124,6 @@ class AccessControl:
         return filtered_results
 
     def log_access(self, user: User, action: str, resource: str, success: bool):
-        """Log access attempts for audit purposes."""
         if not isinstance(user, User):
             logger.error("Cannot log access for invalid user")
             return
@@ -118,6 +131,21 @@ class AccessControl:
         status = "SUCCESS" if success else "DENIED"
         logger.info(f"ACCESS_LOG: User={user.user_id}, Role={user.role}, "
                     f"Action={action}, Resource={resource}, Status={status}")
+
+        entry = {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "user_id": user.user_id,
+            "role": str(user.role),
+            "department": user.department,
+            "action": action,
+            "resource": resource[:200],
+            "status": status,
+        }
+        try:
+            with open(self._audit_file, "a", encoding="utf-8") as f:
+                f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+        except OSError as exc:
+            logger.warning("Could not write audit entry: %s", exc)
 
     def get_user_permissions(self, user: User) -> Set[Permission]:
         if not isinstance(user, User):
@@ -132,7 +160,6 @@ class AccessControl:
 
         allowed_categories = self.get_allowed_categories(user)
 
-        # If no restrictions, allow access
         if allowed_categories is None:
             return True
 

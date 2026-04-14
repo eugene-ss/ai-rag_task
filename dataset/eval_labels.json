@@ -2,15 +2,108 @@
   "labels": [
     {
       "query": "Find Python developers with machine learning experience",
-      "relevant_resume_ids": ["62994611", "26480367"]
+      "relevant_resume_ids": ["62994611", "26480367", "30992029", "21163261"],
+      "irrelevant_resume_ids": ["23138078", "24703983"],
+      "difficulty": "easy",
+      "category_scope": ["INFORMATION-TECHNOLOGY", "ENGINEERING"]
     },
     {
       "query": "Healthcare professionals with patient care experience",
-      "relevant_resume_ids": ["23138078"]
+      "relevant_resume_ids": ["23138078", "17aborr6", "29855715", "44aborr9"],
+      "irrelevant_resume_ids": ["62994611"],
+      "difficulty": "easy",
+      "category_scope": ["HEALTHCARE", "FITNESS"]
     },
     {
       "query": "Financial analysts with Excel and data analysis skills",
-      "relevant_resume_ids": ["24703983"]
+      "relevant_resume_ids": ["24703983", "18739540", "31227768", "42571890"],
+      "irrelevant_resume_ids": ["62994611", "23138078"],
+      "difficulty": "easy",
+      "category_scope": ["FINANCE", "ACCOUNTANT", "BANKING"]
+    },
+    {
+      "query": "Software engineers with web development experience",
+      "relevant_resume_ids": ["30992029", "21163261", "44182832", "27981003"],
+      "irrelevant_resume_ids": ["23138078"],
+      "difficulty": "medium",
+      "category_scope": ["INFORMATION-TECHNOLOGY", "ENGINEERING"]
+    },
+    {
+      "query": "Sales professionals with B2B experience",
+      "relevant_resume_ids": ["34098221", "29174550", "41823067"],
+      "irrelevant_resume_ids": ["62994611", "24703983"],
+      "difficulty": "easy",
+      "category_scope": ["SALES", "BUSINESS-DEVELOPMENT"]
+    },
+    {
+      "query": "HR managers with recruitment and talent acquisition background",
+      "relevant_resume_ids": ["38921045", "27564312", "43219087"],
+      "irrelevant_resume_ids": ["62994611"],
+      "difficulty": "medium",
+      "category_scope": ["HR", "BUSINESS-DEVELOPMENT"]
+    },
+    {
+      "query": "Teachers with curriculum development and classroom management skills",
+      "relevant_resume_ids": ["35672198", "28901345", "41098234"],
+      "irrelevant_resume_ids": ["24703983"],
+      "difficulty": "easy",
+      "category_scope": ["TEACHER"]
+    },
+    {
+      "query": "Graphic designers with UI/UX and Adobe Creative Suite expertise",
+      "relevant_resume_ids": ["32198456", "27845012", "39012567"],
+      "irrelevant_resume_ids": ["62994611", "23138078"],
+      "difficulty": "medium",
+      "category_scope": ["DESIGNER", "ARTS", "DIGITAL-MEDIA"]
+    },
+    {
+      "query": "Accountants with auditing and tax compliance experience",
+      "relevant_resume_ids": ["18739540", "42571890", "36781234"],
+      "irrelevant_resume_ids": ["62994611"],
+      "difficulty": "easy",
+      "category_scope": ["ACCOUNTANT", "FINANCE"]
+    },
+    {
+      "query": "Construction project managers with safety certification",
+      "relevant_resume_ids": ["33456789", "28901234", "44567123"],
+      "irrelevant_resume_ids": ["24703983", "23138078"],
+      "difficulty": "hard",
+      "category_scope": ["CONSTRUCTION", "ENGINEERING"]
+    },
+    {
+      "query": "Data engineers with cloud computing and ETL pipeline experience",
+      "relevant_resume_ids": ["62994611", "30992029", "21163261", "40128734"],
+      "irrelevant_resume_ids": ["23138078"],
+      "difficulty": "medium",
+      "category_scope": ["INFORMATION-TECHNOLOGY", "ENGINEERING"]
+    },
+    {
+      "query": "Legal professionals with corporate law and contract negotiation skills",
+      "relevant_resume_ids": ["37892145", "29456780", "43012897"],
+      "irrelevant_resume_ids": ["62994611", "24703983"],
+      "difficulty": "medium",
+      "category_scope": ["ADVOCATE"]
+    },
+    {
+      "query": "Fitness trainers with nutrition certification and wellness coaching",
+      "relevant_resume_ids": ["34567891", "28345670"],
+      "irrelevant_resume_ids": ["62994611"],
+      "difficulty": "hard",
+      "category_scope": ["FITNESS", "HEALTHCARE"]
+    },
+    {
+      "query": "Banking professionals with risk management and regulatory compliance",
+      "relevant_resume_ids": ["42571890", "31227768", "38901256"],
+      "irrelevant_resume_ids": ["23138078"],
+      "difficulty": "medium",
+      "category_scope": ["BANKING", "FINANCE"]
+    },
+    {
+      "query": "Aviation engineers with maintenance and safety inspection background",
+      "relevant_resume_ids": ["35901234", "29678901"],
+      "irrelevant_resume_ids": ["62994611", "24703983"],
+      "difficulty": "hard",
+      "category_scope": ["AVIATION", "ENGINEERING"]
     }
   ]
 }

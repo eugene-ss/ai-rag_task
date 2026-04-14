@@ -50,6 +50,11 @@ def main():
         help="Skip indexing from CSV/PDF (use with delete/update or query-only)",
     )
     parser.add_argument(
+        "--force-reload",
+        action="store_true",
+        help="Force full re-index even when using --query or --evaluate",
+    )
+    parser.add_argument(
         "--delete-docs",
         help="Comma-separated logical document IDs (metadata id) to remove from Chroma",
     )
@@ -75,12 +80,31 @@ def main():
         default="csv",
         help="Source metadata when using --update-doc (e.g. csv, pdf)",
     )
+    parser.add_argument(
+        "--visualize",
+        nargs="?",
+        const="latest",
+        metavar="EVAL_JSON",
+        help="Generate bar charts from evaluation results. "
+             "Pass a path to a specific evaluation JSON, or omit to use the latest.",
+    )
+    parser.add_argument(
+        "--compare-with",
+        metavar="EVAL_JSON",
+        help="Path to a second evaluation JSON for side-by-side comparison (use with --visualize)",
+    )
+    parser.add_argument(
+        "--eval-per-role",
+        action="store_true",
+        help="Run evaluation once per role (admin, hr_manager, analyst) to compare ACL impact",
+    )
 
     args = parser.parse_args()
 
-    if (args.query or args.evaluate) and not args.skip_load:
-        print("Warning: running without --skip-load will re-index Resume.csv and can create duplicate vectors.")
-        print("Tip: index once, then use --skip-load for query/evaluate workflows.")
+    auto_skip = (args.query or args.evaluate or args.visualize or args.eval_per_role) and not args.force_reload
+    if auto_skip and not args.skip_load:
+        args.skip_load = True
+        print("Auto-skipping dataset load for query/evaluate (use --force-reload to override).")
 
     try:
         # Initialize system
@@ -147,6 +171,16 @@ def main():
             except Exception as e:
                 print(f"Evaluation failed: {e}")
 
+        if args.eval_per_role:
+            print("\nRunning per-role evaluation...")
+            try:
+                per_role = rag.run_evaluation_per_role()
+                for role_name, result in per_role.items():
+                    print(f"\n--- Role: {role_name} ---")
+                    rag._print_evaluation_summary(result)
+            except Exception as e:
+                print(f"Per-role evaluation failed: {e}")
+
         # Test query if provided
         if args.query:
             print(f"\nSearching for: '{args.query}'")
@@ -184,6 +218,33 @@ def main():
 
             except Exception as e:
                 print(f"Search failed: {e}")
+
+        # Visualization
+        if args.visualize:
+            from resume_rag.visualization.charts import generate_all_charts, _latest_eval_file
+            viz_dir = Path(rag.config.results_dir) / "visualizations"
+            if args.visualize == "latest":
+                eval_file = _latest_eval_file(rag.config.evaluation_results_dir)
+                if not eval_file:
+                    print("No evaluation results found to visualize. Run --evaluate first.")
+                else:
+                    print(f"\nGenerating charts from {eval_file.name}...")
+                    charts = generate_all_charts(
+                        eval_file, viz_dir, compare_with=args.compare_with,
+                    )
+                    for c in charts:
+                        print(f"  Created: {c}")
+            else:
+                eval_file = Path(args.visualize)
+                if not eval_file.is_file():
+                    print(f"Evaluation file not found: {eval_file}")
+                else:
+                    print(f"\nGenerating charts from {eval_file}...")
+                    charts = generate_all_charts(
+                        eval_file, viz_dir, compare_with=args.compare_with,
+                    )
+                    for c in charts:
+                        print(f"  Created: {c}")
 
         # System statistics
         print("\nSystem Statistics:")

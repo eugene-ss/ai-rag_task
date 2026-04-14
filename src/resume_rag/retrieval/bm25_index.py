@@ -48,6 +48,37 @@ class BM25ChunkIndex:
         self._rebuild_bm25()
         logger.info("BM25 index size: %s chunks", len(self._documents))
 
+    def remove_by_doc_id(self, doc_id: str) -> int:
+        """Remove all entries whose metadata ``id`` matches *doc_id*."""
+        keep = [
+            i for i, d in enumerate(self._documents)
+            if (d.metadata if isinstance(d.metadata, dict) else {}).get("id") != doc_id
+        ]
+        removed = len(self._documents) - len(keep)
+        if removed == 0:
+            return 0
+        self._uids = [self._uids[i] for i in keep]
+        self._tokenized = [self._tokenized[i] for i in keep]
+        self._documents = [self._documents[i] for i in keep]
+        self._rebuild_bm25()
+        logger.info("Removed %s BM25 entries for doc_id=%s", removed, doc_id)
+        return removed
+
+    def upsert_documents(self, documents: List[Document]) -> None:
+        """Remove old entries for the same logical IDs, then add new ones."""
+        ids_to_replace: set = set()
+        for doc in documents:
+            meta = doc.metadata if isinstance(doc.metadata, dict) else {}
+            rid = meta.get("id")
+            if rid:
+                ids_to_replace.add(str(rid))
+        for rid in ids_to_replace:
+            self.remove_by_doc_id(rid)
+        for doc in documents:
+            self._append_one(doc)
+        self._rebuild_bm25()
+        logger.info("BM25 upsert complete; index size: %s chunks", len(self._documents))
+
     def _append_one(self, doc: Document) -> None:
         uid = chunk_uid_for_document(doc)
         toks = tokenize_for_bm25(doc.page_content or "")
